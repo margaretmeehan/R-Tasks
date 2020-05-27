@@ -1,0 +1,14 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - RVersionTask/*
+
+variables:
+- group: UseRVersion
+- group: Marketplace
+
+stages:
+- template: templates/release.yml

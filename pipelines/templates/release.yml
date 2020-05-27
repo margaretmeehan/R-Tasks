@@ -1,0 +1,138 @@
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: build-steps.yml
+      parameters:
+        workingDir: '$(taskSrc)'
+    - task: TfxInstaller@3
+      inputs:
+        version: 'v0.7.x'
+    - task: PackageAzureDevOpsExtension@3
+      displayName: Package Extension
+      inputs:
+        rootFolder: '$(taskRoot)/'
+        outputPath: '$(taskRoot)'
+        outputVariable: 'Extension.OutputPath'
+        extensionVisibility: 'private'
+        extensionPricing: 'free'
+    - task: CopyFiles@2
+      inputs:
+        Contents: 'scripts/**'
+        TargetFolder: '$(System.DefaultWorkingDirectory)/$(taskRoot)'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Artifact
+      inputs:
+        targetPath: $(System.DefaultWorkingDirectory)/$(taskRoot)
+        artifactname: $(taskRoot)
+
+- stage: Dev
+  jobs:
+  - deployment: Upload
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: r-task-dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: TfxInstaller@3
+            inputs:
+              version: 'v0.7.x'
+          - task: Npm@1
+            displayName: Clear Prev Dev Task
+            continueOnError: true
+            inputs:
+              command: custom
+              workingDir: '$(Pipeline.Workspace)/$(taskSrc)'
+              verbose: false
+              customCommand: 'run delete -- -t $(accessToken) -u $(serviceUrl)'
+          - task: Npm@1
+            displayName: Upload Dev Task
+            inputs:
+              command: custom
+              workingDir: '$(Pipeline.Workspace)/$(taskSrc)'
+              verbose: false
+              customCommand: 'run upload -- -t $(accessToken) -u $(serviceUrl)'
+  - deployment: Validate_Windows
+    dependsOn: Upload
+    pool:
+      vmImage: 'windows-latest'
+    environment: r-task-dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: 'validate-steps.yml'
+  - deployment: Validate_Linux
+    dependsOn: Upload
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: r-task-dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: 'validate-steps.yml'
+  - deployment: Validate_macOS
+    dependsOn: Upload
+    pool:
+      vmImage: 'macos-latest'
+    environment: r-task-dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: 'validate-steps.yml'
+
+# Run publish only if successful previous stage and this is merged to master
+- stage: Prod
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: Publish
+    pool:
+      vmImage: 'ubuntu-latest'
+    environment: r-task-prod
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: TfxInstaller@3
+            inputs:
+              version: 'v0.7.x'
+          - task: QueryAzureDevOpsExtensionVersion@3
+            displayName: 'Query the version from the marketplace'
+            continueOnError: true
+            name: 'Q'
+            inputs:
+              connectTo: 'VsTeam'
+              connectedServiceName: 'Marketplace Connection'
+              publisherId: '$(publisherID)'
+              extensionId: '$(taskID)'
+              versionAction: 'Patch'
+          - task: PublishAzureDevOpsExtension@3
+            displayName: Publish to Marketplace
+            inputs:
+              connectTo: 'VsTeam'
+              connectedServiceName: 'Marketplace Connection'
+              fileType: 'manifest'
+              rootFolder: '$(Pipeline.Workspace)/$(taskRoot)'
+              extensionVersion: '$(Q.Extension.Version)'
+              extensionVisibility: 'private'
+              extensionPricing: 'free'
+              shareWith: '$(sharedList)'
+          # Run step only if using queried version fails
+          - task: PublishAzureDevOpsExtension@3
+            displayName: Publish to Marketplace
+            condition: failed()
+            inputs:
+              connectTo: 'VsTeam'
+              connectedServiceName: 'Marketplace Connection'
+              fileType: 'manifest'
+              rootFolder: '$(Pipeline.Workspace)/$(taskRoot)'
+              extensionVisibility: 'private'
+              extensionPricing: 'free'
+              shareWith: '$(sharedList)'

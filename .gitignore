@@ -1,0 +1,9 @@
+# Task-related generated files
+**/.taskkey
+**/*.vsix
+
+# Generated JS files
+**/*.js
+
+# Node modules
+**/node_modules/

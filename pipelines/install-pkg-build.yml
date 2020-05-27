@@ -1,0 +1,13 @@
+trigger:
+  branches:
+    include:
+    - dev/*
+  paths:
+    include:
+    - RPackagesTask/*
+
+variables:
+- group: InstallRPackages
+
+jobs:
+- template: templates/build.yml

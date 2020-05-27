@@ -1,0 +1,14 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - RPackagesTask/*
+
+variables:
+- group: InstallRPackages
+- group: Marketplace
+
+stages:
+- template: templates/release.yml

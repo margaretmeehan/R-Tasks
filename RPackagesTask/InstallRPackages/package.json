@@ -1,0 +1,25 @@
+{
+  "name": "buildandreleasetask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "test": "mocha tests/_suite.js",
+    "upload": "tfx build tasks upload --task-path ./ --overwrite",
+    "delete": "tfx build tasks delete --task-id f0a8bf98-7761-4789-96b1-a59f1812d61a"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^2.9.5"
+  },
+  "devDependencies": {
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.6",
+    "@types/q": "^1.5.4",
+    "mocha": "^7.2.0",
+    "sync-request": "^6.1.0",
+    "typescript": "^3.9.3"
+  }
+}

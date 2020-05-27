@@ -1,0 +1,13 @@
+trigger:
+  branches:
+    include:
+    - dev/*
+  paths:
+    include:
+    - RScriptTask/*
+
+variables:
+- group: RunRScript
+
+jobs:
+- template: templates/build.yml

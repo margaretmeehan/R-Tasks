@@ -1,0 +1,41 @@
+{
+    "manifestVersion": 1,
+    "id": "install-r-packages",
+    "name": "Install R Packages",
+    "version": "0.1.0",
+    "publisher": "microsoft-jeremydelacruz",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Install specified R packages from CRAN",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "Rlogo-small.png"        
+    },
+    "files": [
+        {
+            "path": "InstallRPackages"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
+    "contributions": [
+        {
+            "id": "install-r-packages-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "InstallRPackages"
+            }
+        }
+    ]
+}

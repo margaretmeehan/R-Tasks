@@ -1,0 +1,24 @@
+# Template steps for building the task and running unit tests
+parameters:
+  workingDir: ''
+
+steps:
+- task: UseNode@1
+  displayName: 'Use Node v10'
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: 'ci'
+    workingDir: '${{parameters.workingDir}}'
+- task: Npm@1
+  displayName: 'TS compile'
+  inputs:
+    command: 'custom'
+    workingDir: '${{parameters.workingDir}}'
+    customCommand: 'run compile'
+- task: Npm@1
+  displayName: 'Run unit tests'
+  inputs:
+    command: 'custom'
+    workingDir: '${{parameters.workingDir}}'
+    customCommand: 'run test'

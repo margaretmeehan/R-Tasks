@@ -1,0 +1,41 @@
+{
+    "manifestVersion": 1,
+    "id": "run-r-script",
+    "name": "Run R Script",
+    "version": "0.0.1",
+    "publisher": "microsoft-jeremydelacruz",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Run specified R script",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "Rlogo-small.png"        
+    },
+    "files": [
+        {
+            "path": "RunRScript"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    },
+    "contributions": [
+        {
+            "id": "run-r-script-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "RunRScript"
+            }
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+# Specific validation steps for individual R tasks
+
+steps:
+# InstallRPackages task validation
+- task: InstallRPackages@0
+  displayName: Install R Packages
+  condition: eq(variables['taskName'], 'InstallRPackages')
+  inputs:
+    rPackageNames: stringr, lubridate
+- pwsh: |
+    Rscript $(Pipeline.Workspace)/$(taskRoot)/scripts/validate-package-install.R
+  displayName: 'Validate Installed Packages'
+  condition: eq(variables['taskName'], 'InstallRPackages')
+
+# RunRScript task validation
+- task: RunRScript@0
+  displayName: Run R Script
+  condition: eq(variables['taskName'], 'RunRScript')
+  inputs:
+    scriptPath: $(Pipeline.Workspace)/$(taskRoot)/scripts/validate-run-script.R
+    arguments: arg1 --arg2 arg3=value
+
+# UseRVersion task validation
+- pwsh: Rscript --version
+  displayName: Check R Version
+  condition: eq(variables['taskName'], 'UseRVersion')
+- task: UseRVersion@0
+  displayName: Use R Version
+  condition: eq(variables['taskName'], 'UseRVersion')
+  inputs:
+    versionSpec: 3.5.3
+    addToPath: true
+- pwsh: Rscript --version
+  displayName: Check R Version
+  condition: eq(variables['taskName'], 'UseRVersion')

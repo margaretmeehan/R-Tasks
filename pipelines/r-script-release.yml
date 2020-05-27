@@ -1,0 +1,14 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - RScriptTask/*
+
+variables:
+- group: RunRScript
+- group: Marketplace
+
+stages:
+- template: templates/release.yml
