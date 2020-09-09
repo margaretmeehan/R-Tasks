@@ -8,7 +8,7 @@ The only prerequisite for running this task is that __the build agent running th
 Provided that R is installed, this task can run on any supported build agent environment (i.e. Windows, Ubuntu, and macOS)
 
 ## Installing R Packages
-When adding this task to an Azure Pipeline, provide a list of R package names separated by commas into the `R Package Names` field to have them installed on the build agent. These packages will then be available for use in any R scripts being run in the pipeline.
+When adding this task to an Azure Pipeline, provide a list of R package names separated by commas into the R Package Names (`rPackageNames`) field to have them installed on the build agent. These packages will then be available for use in any R scripts being run in the pipeline.
 
 In YAML, this should look something like:
 ```yaml
