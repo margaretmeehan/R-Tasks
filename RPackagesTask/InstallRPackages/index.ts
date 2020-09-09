@@ -1,16 +1,16 @@
-import task = require("azure-pipelines-task-lib/task");
+import task = require('azure-pipelines-task-lib/task');
 import * as path from 'path';
-import { IExecSyncOptions } from "azure-pipelines-task-lib/toolrunner";
+import { IExecSyncOptions } from 'azure-pipelines-task-lib/toolrunner';
 
 const RTOOL: string = 'Rscript';
 const INSTALL_SCRIPT_NAME: string = 'install-packages.R';
 
 async function run() {
     try {
-        task.setResourcePath(path.join(__dirname, "task.json"));
+        task.setResourcePath(path.join(__dirname, 'task.json'));
 
         // use comma as delimiter for package names and trim whitespace
-        const rPackageNamesInput: string | undefined = task.getInput("rPackageNames", true);
+        const rPackageNamesInput: string | undefined = task.getInput('rPackageNames', true);
         const rPackageNames: string[] = rPackageNamesInput ? rPackageNamesInput.split(/[,]+/).map(name => name.trim()) : [];
 
         if (!rPackageNames.length) {
@@ -44,7 +44,7 @@ function installRPackages(packageNames: string[]): void {
     // ensure R is installed and availabe in PATH
     const rScriptPath = task.which(RTOOL);
     if (!rScriptPath)
-        throw new Error("R is not installed or properly configured in the PATH");
+        throw new Error('R is not installed or properly configured in the PATH');
 
     // prepare command to run R script and append each package name as args
     let installScriptPath = path.join(__dirname, INSTALL_SCRIPT_NAME);
