@@ -3,7 +3,7 @@ The task in this extension runs a specified R script within a CI/CD pipeline in 
 
 ## Requirements
 There are two prerequisites for using this task: 
-1. __The build agent running the task must have R installed__. R is currently not installed by default on the supported build agents and must be done manually (e.g. by powershell script) before invoking this task.
+1. __The build agent running the task must have R installed__. The `latest` version of R is currently included by default on the supported build agents. If another version is desired, it must be installed manually (e.g. by powershell script) before invoking this task.
 2. __There exists an R script to be run in the repo__. This script will need to be referenced by relative path from project root.
 
 ## Build Agent Compatibility
