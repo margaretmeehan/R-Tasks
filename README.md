@@ -328,3 +328,13 @@ My current workaround is to use an access token created by someone else who alre
 
 ## IV. Credit
 The R logo has been sourced from the the [R Project website](https://www.r-project.org/logo/) and is being used under the [CC-BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/legalcode").
+
+___
+
+## License
+This project uses MIT licensing. All contributions in any form shall have the Open Source Community's best interest in mind. Please feel free to use, fork and contribute back to the community.
+
+## Code of Conduct
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
