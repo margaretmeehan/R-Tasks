@@ -1,8 +1,10 @@
 # Use R Version Task for Azure DevOps
-WIP - unimplemented
+WIP (Work In Progress) - unimplemented.
+
+_Note: Since the default agent images are preinstalled with only the `latest` version of R, this task is still WIP, as there will not be more than one version to choose from._
 
 ## Requirements
-The only prerequisite for running this task is that __the build agent running the task must have R installed__. R is currently not installed by default on the supported build agents and must be done manually (e.g. by powershell script) before invoking this task.
+The only prerequisite for running this task is that __the build agent running the task must have R installed__. The `latest` version of R is currently included by default on the supported build agents. If another version is desired, it must be installed manually (e.g. by powershell script) before invoking this task.
 
 ## Build Agent Compatibility
 Provided that R is installed, this task can run on any supported build agent environment (i.e. Windows, Ubuntu, and macOS)
