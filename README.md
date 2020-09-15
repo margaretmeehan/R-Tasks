@@ -12,10 +12,6 @@ InstallRPackage<br>
 RunRScript<br>
 [![Build Status](https://dev.azure.com/mameehan/R-Tasks/_apis/build/status/margaretmeehan.R-Tasks.RunRScript.Build?branchName=master)](https://dev.azure.com/mameehan/R-Tasks/_build/latest?definitionId=3&branchName=master)
 
-UseRVersion<br>
-[![Build Status](https://dev.azure.com/mameehan/R-Tasks/_apis/build/status/margaretmeehan.R-Tasks.UseRVersion.Build?branchName=master)](https://dev.azure.com/mameehan/R-Tasks/_build/latest?definitionId=1&branchName=master)
-
-
 ## I. CI/CD Setup for Task Development
 For the development of these tasks, there are two general pipeline templates all the tasks use: __Build__ and __Release__. 
 
