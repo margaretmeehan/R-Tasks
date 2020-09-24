@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "install-test-r-packages",
-    "name": "Install Test R Packages",
+    "id": "install-r-packages",
+    "name": "Install R Packages",
     "version": "0.1.0",
     "publisher": "cse-nyc",
     "targets": [
