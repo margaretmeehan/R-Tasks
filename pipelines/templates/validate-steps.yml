@@ -19,17 +19,3 @@ steps:
   inputs:
     scriptPath: $(Pipeline.Workspace)/$(taskRoot)/scripts/validate-run-script.R
     arguments: arg1 --arg2 arg3=value
-
-# UseRVersion task validation
-- pwsh: Rscript --version
-  displayName: Check R Version
-  condition: eq(variables['taskName'], 'UseRVersion')
-- task: UseRVersion@0
-  displayName: Use R Version
-  condition: eq(variables['taskName'], 'UseRVersion')
-  inputs:
-    versionSpec: 3.5.3
-    addToPath: true
-- pwsh: Rscript --version
-  displayName: Check R Version
-  condition: eq(variables['taskName'], 'UseRVersion')
