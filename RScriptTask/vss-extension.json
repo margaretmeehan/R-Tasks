@@ -3,7 +3,7 @@
     "id": "run-r-script",
     "name": "Run R Script",
     "version": "0.0.1",
-    "publisher": "microsoft-jeremydelacruz",
+    "publisher": "nyc-cse",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
