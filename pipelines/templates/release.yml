@@ -104,31 +104,31 @@ stages:
           - task: TfxInstaller@3
             inputs:
               version: 'v0.7.x'
-          # - task: QueryAzureDevOpsExtensionVersion@3
-          #   displayName: 'Query the version from the marketplace'
-          #   continueOnError: true
-          #   name: 'Q'
-          #   inputs:
-          #     connectTo: 'VsTeam'
-          #     connectedServiceName: 'Marketplace Connection'
-          #     publisherId: '$(publisherID)'
-          #     extensionId: '$(taskID)'
-          #     versionAction: 'Patch'
-          # - task: PublishAzureDevOpsExtension@3
-          #   displayName: Publish to Marketplace
-          #   inputs:
-          #     connectTo: 'VsTeam'
-          #     connectedServiceName: 'Marketplace Connection'
-          #     fileType: 'manifest'
-          #     rootFolder: '$(Pipeline.Workspace)/$(taskRoot)'
-          #     extensionVersion: '$(Q.Extension.Version)'
-          #     extensionVisibility: 'private'
-          #     extensionPricing: 'free'
-          #     shareWith: '$(sharedList)'
+          - task: QueryAzureDevOpsExtensionVersion@3
+            displayName: 'Query the version from the marketplace'
+            continueOnError: true
+            name: 'Q'
+            inputs:
+              connectTo: 'VsTeam'
+              connectedServiceName: 'Marketplace Connection'
+              publisherId: '$(publisherID)'
+              extensionId: '$(taskID)'
+              versionAction: 'Patch'
+          - task: PublishAzureDevOpsExtension@3
+            displayName: Publish to Marketplace
+            inputs:
+              connectTo: 'VsTeam'
+              connectedServiceName: 'Marketplace Connection'
+              fileType: 'manifest'
+              rootFolder: '$(Pipeline.Workspace)/$(taskRoot)'
+              extensionVersion: '$(Q.Extension.Version)'
+              extensionVisibility: 'private'
+              extensionPricing: 'free'
+              shareWith: '$(sharedList)'
           # Run step only if using queried version fails
           - task: PublishAzureDevOpsExtension@3
             displayName: Publish to Marketplace
-            # condition: failed()
+            condition: failed()
             inputs:
               connectTo: 'VsTeam'
               connectedServiceName: 'Marketplace Connection'
