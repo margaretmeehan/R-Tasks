@@ -128,7 +128,7 @@ stages:
           # Run step only if using queried version fails
           - task: PublishAzureDevOpsExtension@3
             displayName: Publish to Marketplace
-            condition: failed()
+            # condition: failed()
             inputs:
               connectTo: 'VsTeam'
               connectedServiceName: 'Marketplace Connection'
