@@ -57,36 +57,36 @@ stages:
               workingDir: '$(Pipeline.Workspace)/$(taskSrc)'
               verbose: false
               customCommand: 'run upload -- -t $(accessToken) -u $(serviceUrl)'
-  - deployment: Validate_Windows
-    dependsOn: Upload
-    pool:
-      vmImage: 'windows-latest'
-    environment: r-task-dev
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: 'validate-steps.yml'
-  - deployment: Validate_Linux
-    dependsOn: Upload
-    pool:
-      vmImage: 'ubuntu-latest'
-    environment: r-task-dev
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: 'validate-steps.yml'
-  - deployment: Validate_macOS
-    dependsOn: Upload
-    pool:
-      vmImage: 'macos-latest'
-    environment: r-task-dev
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: 'validate-steps.yml'
+  # - deployment: Validate_Windows
+  #   dependsOn: Upload
+  #   pool:
+  #     vmImage: 'windows-latest'
+  #   environment: r-task-dev
+  #   strategy:
+  #     runOnce:
+  #       deploy:
+  #         steps:
+  #         - template: 'validate-steps.yml'
+  # - deployment: Validate_Linux
+  #   dependsOn: Upload
+  #   pool:
+  #     vmImage: 'ubuntu-latest'
+  #   environment: r-task-dev
+  #   strategy:
+  #     runOnce:
+  #       deploy:
+  #         steps:
+  #         - template: 'validate-steps.yml'
+  # - deployment: Validate_macOS
+  #   dependsOn: Upload
+  #   pool:
+  #     vmImage: 'macos-latest'
+  #   environment: r-task-dev
+  #   strategy:
+  #     runOnce:
+  #       deploy:
+  #         steps:
+  #         - template: 'validate-steps.yml'
 
 # Run publish only if successful previous stage and this is merged to master
 - stage: Prod
