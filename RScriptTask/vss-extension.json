@@ -2,8 +2,8 @@
     "manifestVersion": 1,
     "id": "run-r-script",
     "name": "Run R Script",
-    "version": "0.0.1",
-    "publisher": "microsoft-jeremydelacruz",
+    "version": "1.0.0",
+    "publisher": "cse-nyc",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"

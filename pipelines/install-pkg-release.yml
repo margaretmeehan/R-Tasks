@@ -6,6 +6,9 @@ trigger:
     include:
     - RPackagesTask/*
 
+# no PR triggers
+pr: none
+
 variables:
 - group: InstallRPackages
 - group: Marketplace
