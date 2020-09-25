@@ -121,7 +121,7 @@ stages:
               fileType: 'manifest'
               rootFolder: '$(Pipeline.Workspace)/$(taskRoot)'
               extensionVersion: '$(Q.Extension.Version)'
-              extensionVisibility: 'private'
+              extensionVisibility: 'public'
               extensionPricing: 'free'
               shareWith: '$(sharedList)'
           # Run step only if using queried version fails
@@ -133,6 +133,6 @@ stages:
               connectedServiceName: 'Marketplace Connection'
               fileType: 'manifest'
               rootFolder: '$(Pipeline.Workspace)/$(taskRoot)'
-              extensionVisibility: 'private'
+              extensionVisibility: 'public'
               extensionPricing: 'free'
               shareWith: '$(sharedList)'
