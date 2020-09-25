@@ -87,6 +87,7 @@ stages:
         deploy:
           steps:
           - template: 'validate-steps.yml'
+
 # Run publish only if successful previous stage and this is merged to master
 - stage: Prod
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
