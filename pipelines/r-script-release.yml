@@ -15,3 +15,5 @@ variables:
 
 stages:
 - template: templates/release.yml
+  parameters:
+    taskName: run-r-script

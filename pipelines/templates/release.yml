@@ -1,3 +1,9 @@
+parameters:
+- name: taskName
+  displayName: 'Name of task to validate'
+  type: string
+  default: ''
+
 stages:
 - stage: Build
   jobs:
@@ -66,7 +72,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: 'validate-steps.yml'
+            - ${{ if eq(parameters.taskName, 'install-r-packages') }}:
+              - template: 'validate-install-r-packages.yml'
+            - ${{ if eq(parameters.taskName, 'run-r-script') }}:
+              - template: 'validate-run-r-script.yml'
   - deployment: Validate_Linux
     dependsOn: Upload
     pool:
@@ -76,7 +85,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: 'validate-steps.yml'
+            - ${{ if eq(parameters.taskName, 'install-r-packages') }}:
+              - template: 'validate-install-r-packages.yml'
+            - ${{ if eq(parameters.taskName, 'run-r-script') }}:
+              - template: 'validate-run-r-script.yml'
   - deployment: Validate_macOS
     dependsOn: Upload
     pool:
@@ -86,7 +98,10 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: 'validate-steps.yml'
+            - ${{ if eq(parameters.taskName, 'install-r-packages') }}:
+              - template: 'validate-install-r-packages.yml'
+            - ${{ if eq(parameters.taskName, 'run-r-script') }}:
+              - template: 'validate-run-r-script.yml'
 
 # Run publish only if successful previous stage and this is merged to master
 - stage: Prod
