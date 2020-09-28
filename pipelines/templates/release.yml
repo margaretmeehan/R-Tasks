@@ -66,7 +66,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: 'validate-steps.yml'
+          - template: 'validate-$(taskID).yml'
   - deployment: Validate_Linux
     dependsOn: Upload
     pool:
@@ -76,7 +76,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: 'validate-steps.yml'
+          - template: 'validate-$(taskID).yml'
   - deployment: Validate_macOS
     dependsOn: Upload
     pool:
@@ -86,7 +86,7 @@ stages:
       runOnce:
         deploy:
           steps:
-          - template: 'validate-steps.yml'
+          - template: 'validate-$(taskID).yml'
 
 # Run publish only if successful previous stage and this is merged to master
 - stage: Prod
