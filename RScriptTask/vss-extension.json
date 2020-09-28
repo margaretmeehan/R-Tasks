@@ -26,6 +26,10 @@
             "path": "README.md"
         }
     },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/margaretmeehan/R-Tasks/tree/master/RScriptTask"
+    },
     "contributions": [
         {
             "id": "run-r-script-task",
